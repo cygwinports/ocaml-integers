@@ -1,0 +1,26 @@
+inherit ocaml
+
+NAME="ocaml-integers"
+VERSION=0.2.2
+RELEASE=1
+CATEGORY="OCaml"
+SUMMARY="Various signed and unsigned integer types for OCaml"
+DESCRIPTION="The ocaml-integers library provides a number of 8-, 16-, 32-
+and 64-bit signed and unsigned integer types, together with aliases such as
+long and size_t whose sizes depend on the host platform."
+HOMEPAGE="https://github.com/ocamllabs/ocaml-integers"
+SRC_URI="${HOMEPAGE}/archive/v${VERSION}/ocaml-integers-v${VERSION}.tar.gz"
+
+src_compile() {
+	lndirs
+	cd ${B}
+	cygmake -j1
+}
+
+src_install() {
+	cd ${B}
+	opam-installer \
+		--prefix=${D}/usr \
+		--libdir=${D}${OCAML_LIBDIR} \
+		--docdir=${D}/usr/share/doc
+}
